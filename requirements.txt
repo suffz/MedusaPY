@@ -1,0 +1,6 @@
+pycurl
+colored
+asyncio
+aiohttp
+sockets
+re
