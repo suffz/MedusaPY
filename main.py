@@ -192,6 +192,7 @@ def socketSendingGC():
                     while stoplooping < 6:
                         data = ss.recv(10000).decode("utf-8")
                         print(f"[{Fore.RED}{data[9:12]}{Fore.RESET}] Recieved Request - {time()}")
+                        stoplooping += 1
                         if data[9:12] == '200':
                             print()
                             print(f"[{Fore.GREEN}{data[9:12]}{Fore.RESET}] Successfully sniped: {name}!")
