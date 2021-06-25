@@ -209,7 +209,7 @@ def socketSendingGC():
 def snipeTime():
     sleeping = dropTime - time() - (delay / 1000)
 
-    print(f"[{Fore.BLUE}INFO{Fore.RESET}] Sleeping for: {sleeping} Seconds\n")
+    print(f"[{Fore.CYAN}INFO{Fore.RESET}] Sleeping for: {sleeping} Seconds\n")
 
     sleep(sleeping - 15)
 
