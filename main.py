@@ -51,9 +51,9 @@ async def check():
         end = perf_counter()
         time2 = time()
         pingtimes.append(time2 - time1)
-        print(f"- Took {int((time2 - time1) * 1000)}ms")
+        print(f"[{Fore.CYAN}~{Fore.RESET}] Took {int((time2 - time1) * 1000)}ms")
         offset = int(sum(pingtimes) / len(pingtimes) * 10000 / 2)
-    print("\n* [" + str(datetime.now().strftime("%H:%M:%S")) + f"] Recommended delay: {offset + 10}")
+    print(f"\n* [{Fore.CYAN}!{Fore.RESET}] Recommended delay: {offset + 10}\n")
     return round(offset)
 
 
@@ -85,22 +85,22 @@ def mfaLogin():
         parsedJSON = json.loads(responseJSON.text)
         global bearer
         bearer = parsedJSON['accessToken']
-        # Securing & Checking ncE
+        
         secure = requests.get("https://api.mojang.com/user/security/location", headers={'Authorization': bearer})
         ncE = requests.get("https://api.minecraftservices.com/minecraft/profile/namechange",
                            headers={"Authorization": f"Bearer {bearer}"}).json()
         Security = requests.get("https://api.mojang.com/user/security/challenges",
                                 headers={"Authorization": f"Bearer {bearer}"}).json()
 
-        # The part under checks for ncE & security questions
+        
         answers = []
         if Security == []:
             if ncE['nameChangeAllowed'] is False:
-                print(f"\n* [] Account {email} is not eligible for name change!")
+                print(f"\n* [{Fore.CYAN}!{Fore.RESET}] Account {email} is not eligible for name change!")
                 quit()
             else:
 
-                print(f"\n* [] Successfully logged into account {email}\n")
+                print(f"\n* [{Fore.CYAN}+{Fore.RESET}] Successfully logged into account {email}\n")
         else:
             try:
                 accs = 1
@@ -206,14 +206,10 @@ def socketSendingGC():
                         quit()
 
 
-async def socketMS():
-    pass
-
-
 def snipeTime():
     sleeping = dropTime - time() - (delay / 1000)
 
-    print(f"[{Fore.BLUE}INFO{Fore.RESET}] Sleeping for: {sleeping} Seconds")
+    print(f"[{Fore.BLUE}INFO{Fore.RESET}] Sleeping for: {sleeping} Seconds\n")
 
     sleep(sleeping - 15)
 
@@ -246,7 +242,6 @@ def start():
         socketSendingGC()
     elif option == 3:
         print(f"[{Fore.CYAN}INFO{Fore.RESET}] Enter Bearer: ")
-        global bearer
         bearer = str(input(f"{Fore.RED}>: {Fore.RESET}"))
         snipeTime()
         socketSending()
