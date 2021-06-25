@@ -1,9 +1,8 @@
-
-
 try:
     import socket
     import urllib
-    from os import path, system, os
+    import os
+    from os import path, system
     import re
     from time import time, sleep, perf_counter
     from datetime import datetime
