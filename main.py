@@ -85,14 +85,14 @@ def mfaLogin():
         parsedJSON = json.loads(responseJSON.text)
         global bearer
         bearer = parsedJSON['accessToken']
-        
+
         secure = requests.get("https://api.mojang.com/user/security/location", headers={'Authorization': bearer})
         ncE = requests.get("https://api.minecraftservices.com/minecraft/profile/namechange",
                            headers={"Authorization": f"Bearer {bearer}"}).json()
         Security = requests.get("https://api.mojang.com/user/security/challenges",
                                 headers={"Authorization": f"Bearer {bearer}"}).json()
 
-        
+
         answers = []
         if Security == []:
             if ncE['nameChangeAllowed'] is False:
@@ -189,14 +189,14 @@ def socketSendingGC():
                 while success < 1:
                     while stoplooping < 6:
                         data = ss.recv(10000).decode("utf-8")
-                        print(f"[{Fore.CYAN}{data[9:12]}{Fore.RESET}] Recieved Request - {time()}")
+                        print(f"[{Fore.RED}{data[9:12]}{Fore.RESET}] Recieved Request - {time()}")
                         if data[9:12] == '200':
                             print()
-                            print(f"[{Fore.CYAN}!{Fore.RESET}] Successfully sniped: {name}!")
+                            print(f"[{Fore.GREEN}{data[9:12]}{Fore.RESET}] Successfully sniped: {name}!")
                             success += 1
                             stoplooping += 2
                         if data[9:12] == '429':
-                            print(f"[{Fore.CYAN}X{Fore.RESET}] Rate limited!")
+                            print(f"[{Fore.RED}{data[9:12]}{Fore.RESET}] Rate limited!")
                             stoplooping += 1
                     quit()
                     try:
