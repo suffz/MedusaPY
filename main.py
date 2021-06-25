@@ -141,21 +141,21 @@ def socketSending():
                                                                     'utf-8') + b' HTTP/1.1\r\nHost: api.minecraftservices.com\r\nAuthorization: Bearer ' + bytes(
                         bearer, 'utf-8') + b'\r\n\r\n')
 
-                    print(f"[{Fore.CYAN}INFO{Fore.RESET}] Sent request - {time()}")
+                    print(f"[{Fore.CYAN}INFO{Fore.RESET}] Sent request - 0." + str(datetime.now())[20:])
                     sendamount += 1
                 print()
                 while success < 1:
                     while stoplooping < 2:
                         data = ss.recv(10000).decode("utf-8")
-                        print(f"[{Fore.CYAN}{data[9:12]}{Fore.RESET}] Recieved Request - {time()}")
+                        print(f"[{Fore.RED}{data[9:12]}{Fore.RESET}] Recieved Request - 0." + str(datetime.now())[20:])
                         stoplooping += 1
                         if data[9:12] == '200':
                             print()
-                            print(f"[{Fore.CYAN}!{Fore.RESET}] Successfully sniped: {name}!")
+                            print(f"[{Fore.GREEN}{data[9:12]}{Fore.RESET}] Successfully sniped: {name}!")
                             success += 1
                             stoplooping += 2
                         if data[9:12] == '429':
-                            print(f"[{Fore.CYAN}X{Fore.RESET}] Rate limited!")
+                            print(f"[{Fore.RED}{data[9:12]}{Fore.RESET}] Rate limited!")
                             stoplooping += 1
                     quit()
                     try:
@@ -185,13 +185,13 @@ def socketSendingGC():
                          '{"profileName": "%s"}' % name]), "utf-8"))
                     ss.send(data_to_send)
 
-                    print(f"[{Fore.CYAN}INFO{Fore.RESET}] Sent request - {time()}")
+                    print(f"[{Fore.CYAN}INFO{Fore.RESET}] Sent request - 0." + str(datetime.now())[20:])
                     sendamount += 1
                 print()
                 while success < 1:
                     while stoplooping < 6:
                         data = ss.recv(10000).decode("utf-8")
-                        print(f"[{Fore.RED}{data[9:12]}{Fore.RESET}] Recieved Request - {time()}")
+                        print(f"[{Fore.RED}{data[9:12]}{Fore.RESET}] Recieved Request - 0." + str(datetime.now())[20:])
                         stoplooping += 1
                         if data[9:12] == '200':
                             print()
