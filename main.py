@@ -1,7 +1,9 @@
+
+
 try:
     import socket
     import urllib
-    from os import path, system
+    from os import path, system, os
     import re
     from time import time, sleep, perf_counter
     from datetime import datetime
@@ -19,7 +21,7 @@ except ImportError:
     input("Finished installing required modules, press enter to continue...")
     quit()
 
-
+os.system("")
 global name
 global delay
 global dropTime
@@ -147,6 +149,7 @@ def socketSending():
                     while stoplooping < 2:
                         data = ss.recv(10000).decode("utf-8")
                         print(f"[{Fore.CYAN}{data[9:12]}{Fore.RESET}] Recieved Request - {time()}")
+                        stoplooping += 1
                         if data[9:12] == '200':
                             print()
                             print(f"[{Fore.CYAN}!{Fore.RESET}] Successfully sniped: {name}!")
@@ -220,6 +223,7 @@ def start():
     print(
         f"[{Fore.CYAN}INFO{Fore.RESET}] Ver: \n\n[{Fore.CYAN}1{Fore.RESET}]: SFA/MFA\n[{Fore.CYAN}2{Fore.RESET}]: GC\n[{Fore.CYAN}3{Fore.RESET}]: MS\n")
     option = int(input(f"{Fore.RED}>: {Fore.RESET}"))
+    print("\n")
     print(f"[{Fore.CYAN}INFO{Fore.RESET}] Enter Name: ")
     global name
     name = str(input(f"{Fore.RED}>: {Fore.RESET}"))
